@@ -1,0 +1,8 @@
+name: Lumberjack
+version: '${version}'
+main: ot.dan.lumberjack.Lumberjack
+api-version: 1.17
+prefix: Lumberjack
+loadbefore: [ Multiverse-Core ]
+authors: [ otDan ]
+description: A minigame that resembles the famous Lumerjack but remade in Minecraft
