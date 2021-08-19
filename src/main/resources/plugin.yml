@@ -1,8 +1,15 @@
 name: Lumberjack
-version: '${version}'
-main: ot.dan.lumberjack.Lumberjack
+version: ${version}
+main: ot.dan.lumberjack.LumberjackPlugin
 api-version: 1.17
 prefix: Lumberjack
 loadbefore: [ Multiverse-Core ]
 authors: [ otDan ]
-description: A minigame that resembles the famous Lumerjack but remade in Minecraft
+description: A minigame that resembles the well known web game Lumerjack but remade in Minecraft
+commands:
+  lumberjack:
+    description: Lumberjack game main task
+    aliases:
+      - lumber
+      - lumberj
+      - ljack

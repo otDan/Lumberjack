@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'java'
 }
@@ -5,29 +7,37 @@ plugins {
 group = 'ot.dan'
 version = '1.0-SNAPSHOT'
 
+sourceCompatibility = '16'
+targetCompatibility = '16'
+
 repositories {
-    maven { url "https://papermc.io/repo/repository/maven-public/" }
+    mavenLocal()
+//    mavenCentral()
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+
+    maven {
+        url "https://nexus.scarsz.me/content/groups/public/"
+    }
 }
 
 dependencies {
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
-}
+    compileOnly 'org.spigotmc:spigot:1.17.1-R0.1-SNAPSHOT'
 
-def targetJavaVersion = 11
-java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+    compileOnly 'org.jetbrains:annotations:22.0.0'
 }
 
 processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
+    filter {
+        it.replace('${version}', version)
     }
+}
+
+jar {
+    destinationDirectory.set(file("E:\\Servers\\Z_GuiTester\\plugins"))
 }
