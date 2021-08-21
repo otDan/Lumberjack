@@ -10,27 +10,16 @@ import ot.dan.lumberjack.LumberjackPlugin;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractCommand implements Command, CommandExecutor, TabCompleter {
+public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
 
     private CommandSender commandSender;
     private final String name;
-//    private final TabCompletes tabCompletes;
 
     public AbstractCommand(@NotNull LumberjackPlugin plugin, String command) {
         this.name = command;
         PluginCommand pluginCommand = Objects.requireNonNull(plugin.getCommand(this.name));
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(this);
-    }
-
-    @Override
-    public CommandSender getCommandSender() {
-        return this.commandSender;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
     }
 
     @Override
@@ -49,5 +38,13 @@ public abstract class AbstractCommand implements Command, CommandExecutor, TabCo
     public abstract void perform(CommandSender commandSender, org.bukkit.command.Command command, String label, String[] args);
 
     public abstract List<String> complete(CommandSender commandSender, org.bukkit.command.Command command, String label, String[] args);
+
+    public CommandSender getCommandSender() {
+        return this.commandSender;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }
 
